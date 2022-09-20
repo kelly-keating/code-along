@@ -4,10 +4,15 @@ function getAllMovies(db = conn) {
   return db('movies')
 }
 
-// POST
+function insertMovie(newMovie, db = conn) {
+  return db('movies')
+    .insert(newMovie)
+}
+
 // PATCH
 // DELETE
 
 module.exports = {
-  getAllMovies
+  getAllMovies,
+  insertMovie,
 }
