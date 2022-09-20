@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { addAMovie } from '../actions/movies'
 import { searchForMovie } from '../apis/imdb'
 
 function AddMovie() {
+  const alreadyAddedIds = useSelector(store => store.movies.map(movie => movie.imdb_id))
+  console.log(alreadyAddedIds)
+
   const [movieSearch, setMovieSearch] = useState('star wars rogue one')
   const [results, setResults] = useState([])
 
@@ -46,7 +49,7 @@ function AddMovie() {
           <img src={movie.image} />
           <p>{movie.title}</p>
           {/* <button onClick={handleAdd(movie)}>Save</button> */}
-          <button onClick={() => handleAdd(movie)}>Save</button>
+          <button onClick={() => handleAdd(movie)} disabled={alreadyAddedIds.includes(movie.id)} >Save</button>
         </div>
       ))}
     </>
